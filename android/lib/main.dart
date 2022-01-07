@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() {
+void main() { //Tele tıp Uygulamsı
   runApp(const MyApp());
 }
 
