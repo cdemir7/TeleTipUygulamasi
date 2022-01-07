@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tele_tip/screens/giris_ekrani.dart';
-
+import 'package:android/global_degisgenler.dart';
+import 'Screens/giris_ekrani.dart';
 void main() {
   runApp(MyApp());
 }
