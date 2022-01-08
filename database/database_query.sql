@@ -62,3 +62,22 @@ foreign key (abd_ID)
 	REFERENCES abd(abd_ID)
         on delete cascade
 )
+Create table Mesajlar
+(
+mesaj_ID int auto_increment primary key,
+doktor_ID int not null,
+hasta_ID int not null,
+mesaj varchar(50),
+eklenti_path varchar(100),
+tarih datetime,
+yon boolean,
+
+CONSTRAINT fk_mesaj_doktor
+foreign key (doktor_ID)
+	REFERENCES doktorlar(doktor_ID)
+		on delete cascade,
+CONSTRAINT fk_mesaj_hasta
+foreign key (hasta_ID)
+	REFERENCES hastalar(hasta_ID)
+		on delete cascade
+)
