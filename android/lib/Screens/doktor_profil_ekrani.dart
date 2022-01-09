@@ -60,7 +60,7 @@ Widget DoktorProfilBody() {
             ),
             SizedBox(width: 5),
             Text(
-              doktorSoyadi,
+              doktorEpostasi,
               style: TextStyle(fontSize: 20),
             ),
           ],
