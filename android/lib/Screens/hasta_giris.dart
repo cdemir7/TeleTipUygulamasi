@@ -13,7 +13,7 @@ class Hasta_Giris extends StatelessWidget {
           child: TextField(
             decoration: InputDecoration(
               border: OutlineInputBorder(),
-              hintText: 'TC Kimlik Numaranızı Giriniz....',
+              hintText: 'Mail adresinizi Giriniz ....',
             ),
           ),
         ),
