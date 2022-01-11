@@ -132,8 +132,18 @@ class _Hasta_Ana_EkraniState extends State<Hasta_Ana_Ekrani> {
             child: ListView.builder(
               itemCount: doktorlar.length,
               itemBuilder: (BuildContext context, int index) {
-                return Card(
-                  child: Text('${doktorlar[index]}'),
+                return GestureDetector(
+                  onTap: () {},
+                  child: Card(
+                    child: InkWell(
+                      onTap: () async {},
+                      child: Container(
+                        child: Text('${doktorlar[index]}'),
+                        width: 100.0,
+                        height: 100.0,
+                      ),
+                    ),
+                  ),
                 );
               },
             ),
