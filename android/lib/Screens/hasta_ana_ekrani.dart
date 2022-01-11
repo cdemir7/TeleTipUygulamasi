@@ -7,18 +7,10 @@ class Hasta_Ana_Ekrani extends StatefulWidget {
   _Hasta_Ana_EkraniState createState() => _Hasta_Ana_EkraniState();
 }
 
-class Doktor {
-  String ad = 'afd';
-  int y = 5;
-
-  Doktor(String ad, int y) {
-    this.ad = ad;
-    this.y = y;
-  }
-}
+String Doktor(var ad, var y) => "$ad $y";
 
 class _Hasta_Ana_EkraniState extends State<Hasta_Ana_Ekrani> {
-  List<Doktor> doktorlar = [
+  List<String> doktorlar = [
     Doktor('ada', 5),
     Doktor('ada', 5),
     Doktor('ada', 5),
@@ -141,7 +133,7 @@ class _Hasta_Ana_EkraniState extends State<Hasta_Ana_Ekrani> {
               itemCount: doktorlar.length,
               itemBuilder: (BuildContext context, int index) {
                 return Card(
-                  doktorlar[index],
+                  child: Text('${doktorlar[index]}'),
                 );
               },
             ),
