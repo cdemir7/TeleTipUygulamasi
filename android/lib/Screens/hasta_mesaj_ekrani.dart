@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(Hasta_Mesaj_Ekrani());
-
 class Hasta_Mesaj_Ekrani extends StatefulWidget {
   const Hasta_Mesaj_Ekrani({Key? key}) : super(key: key);
 
@@ -48,6 +46,9 @@ class _Hasta_Mesaj_EkraniState extends State<Hasta_Mesaj_Ekrani> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("HASTA MESAJ EKRANI"),
+      ),
       body: Wrap(
         children: [
           Column(
@@ -62,7 +63,7 @@ class _Hasta_Mesaj_EkraniState extends State<Hasta_Mesaj_Ekrani> {
                 height: 50,
               ),
               Container(
-                height: 670,
+                height: 500,
                 child: ListView.builder(
                   itemCount: konusmalarim.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -77,7 +78,7 @@ class _Hasta_Mesaj_EkraniState extends State<Hasta_Mesaj_Ekrani> {
                               style: TextStyle(color: Colors.black),
                             ),
                             width: 100.0,
-                            height: 100.0,
+                            height: 70.0,
                           ),
                         ),
                       ),

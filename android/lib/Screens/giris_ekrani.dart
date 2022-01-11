@@ -1,7 +1,9 @@
+import 'package:android/Screens/doktor_giris.dart';
 import 'package:flutter/material.dart';
+import './hasta_giris.dart';
 
-class Giris_Ekrani extends StatelessWidget {
-  const Giris_Ekrani({Key? key}) : super(key: key);
+class AnaGirisEkrani extends StatelessWidget {
+  const AnaGirisEkrani({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +12,7 @@ class Giris_Ekrani extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.only(top: 320),
+            padding: EdgeInsets.only(top: 200),
             child: RaisedButton(
               highlightColor: Colors.lightBlueAccent,
               elevation: 10.0,
@@ -22,7 +24,8 @@ class Giris_Ekrani extends StatelessWidget {
                 style: TextStyle(fontSize: 40),
               ),
               padding: EdgeInsets.all(35),
-              onPressed: () {},
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Doktor_Giris())),
               textColor: Colors.black,
             ),
           ),
@@ -39,7 +42,8 @@ class Giris_Ekrani extends StatelessWidget {
                 style: TextStyle(fontSize: 40),
               ),
               padding: EdgeInsets.all(40),
-              onPressed: () {},
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Hasta_Giris())),
               textColor: Colors.black,
             ),
           ),

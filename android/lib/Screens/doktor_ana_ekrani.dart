@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './doktor_giris.dart';
+import './doktor_profil_ekrani.dart';
 
 class Doktor_Ana_Ekrani extends StatefulWidget {
   const Doktor_Ana_Ekrani({Key? key}) : super(key: key);
@@ -45,6 +47,9 @@ class _Doktor_Ana_EkraniState extends State<Doktor_Ana_Ekrani> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("DOKTOR ANA EKRANI"),
+      ),
       body: Column(
         children: [
           Center(
@@ -88,7 +93,12 @@ class _Doktor_Ana_EkraniState extends State<Doktor_Ana_Ekrani> {
                 'Çıkış',
                 style: TextStyle(fontSize: 13.5),
               ),
-              onPressed: () {},
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Doktor_Giris(),
+                ),
+              ),
             ),
             SizedBox(
               width: 180.0,
@@ -100,7 +110,10 @@ class _Doktor_Ana_EkraniState extends State<Doktor_Ana_Ekrani> {
                 'Profile Git',
                 style: TextStyle(fontSize: 13.5),
               ),
-              onPressed: () {},
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DoktorProfilEkrani())),
             ),
           ]),
         ],

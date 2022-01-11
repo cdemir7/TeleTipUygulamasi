@@ -1,5 +1,5 @@
+import 'package:android/Screens/doktor_profil_ekrani.dart';
 import 'package:flutter/material.dart';
-
 
 class DoktorProfilEdit extends StatefulWidget {
   DoktorProfilEdit({Key? key}) : super(key: key);
@@ -11,56 +11,78 @@ class DoktorProfilEdit extends StatefulWidget {
 class _DoktorProfilEditState extends State<DoktorProfilEdit> {
   String doktorAdi = "DOKTOR ADI";
   String doktorSoyadi = "DOKTOR SOYADI";
-  String doktorEpostasi = "DOKTOR E-POSTA'SI";
-  String doktorAnabilimDali = "DOKTOR ANABİLİM DALI";
-  List<String> uzmanlikAlanlari = ["ALAN 1", "ALAN 2", "ALAN 3"];
-  List<bool> dene = [false, false, false];
 
-  String alan1 = "ALAN1";
-  String alan2 = "ALAN2";
-  String alan3 = "ALAN3";
+  List<bool> dene = [false, false, false, false, false];
   bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      children: [
-        Column(
-          //crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 20),
-            Container(
-              height: 150,
-              width: 150,
-              child: Image.asset('assets/profil.png'),
-            ),
-            SizedBox(height: 20),
-            RaisedButton(
-              onPressed: () {},
-              child: Text("FOTOĞRAFI DEĞİŞTİR"),
-            ),
-            SizedBox(height: 10),
-            TextField(
-              //controller: t1,
-              cursorColor: Colors.black,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: doktorEpostasi,
+    return Scaffold(
+      appBar: AppBar(title: Text("DOKTOR PROFİL DÜZENLEME")),
+      body: Wrap(
+        children: [
+          Column(
+            //crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: 20),
+              Container(
+                height: 150,
+                width: 150,
+                child: Image.asset('assets/profil.png'),
               ),
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                SizedBox(width: 30),
-                Text(
-                  "UZMANLIK ALANLARI:",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              SizedBox(height: 20),
+              RaisedButton(
+                onPressed: () {},
+                child: Text("FOTOĞRAFI DEĞİŞTİR"),
+              ),
+              SizedBox(height: 10),
+              TextField(
+                //controller: t1,
+                cursorColor: Colors.black,
+                maxLength: 20,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: doktorAdi,
                 ),
-              ],
-            ),
-            Container(
-              height: 200,
-              child: Scrollbar(
+              ),
+              TextField(
+                //controller: t1,
+                cursorColor: Colors.black,
+                maxLength: 20,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: doktorSoyadi,
+                ),
+              ),
+              TextField(
+                //controller: t1,
+                cursorColor: Colors.black,
+                maxLength: 20,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: "YENİ ŞİFRE",
+                ),
+              ),
+              TextField(
+                //controller: t1,
+                cursorColor: Colors.black,
+                maxLength: 20,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: "YENİ ŞİFRE TEKRAR",
+                ),
+              ),
+              /*Row(
+                children: [
+                  SizedBox(width: 30),
+                  Text(
+                    "UZMANLIK ALANLARI:",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+               Container(
+                height: 200,
                 child: ListView.builder(
                   itemCount: uzmanlikAlanlari.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -76,20 +98,23 @@ class _DoktorProfilEditState extends State<DoktorProfilEdit> {
                     );
                   },
                 ),
+              ), */
+              Wrap(
+                children: [
+                  SizedBox(width: 5),
+                  RaisedButton(
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DoktorProfilEkrani())),
+                    child: Text("KAYDET"),
+                  ),
+                ],
               ),
-            ),
-            Wrap(
-              children: [
-                SizedBox(width: 5),
-                RaisedButton(
-                  onPressed: () {},
-                  child: Text("KAYDET"),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
