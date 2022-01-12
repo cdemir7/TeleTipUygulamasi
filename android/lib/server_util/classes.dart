@@ -59,14 +59,14 @@ class Uzmanlik {
       required this.uzmanlik_ISIM,
   });
 }
-class Mesaj {
+class Mesaj {// gonderen degeri 0 ise doktor 1 ise hasta
   final int mesaj_ID;
   final String doktor_ID;
   final String hasta_ID;
   final String mesaj;
   final String? eklenti_path;
   final String? mesaj_tarihi;
-  final String gonderen;
+  final bool gonderen;
 
   Mesaj(
     {
