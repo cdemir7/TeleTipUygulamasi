@@ -1,13 +1,13 @@
 
-import 'dart:math';
 
-import 'package:github_dump/server_util/classes.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:sulo/classes.dart';
+
 Future<List<Doktor>> doktorGetRequest() async {
     //replace your restFull API here.
-    var url = "http://37.75.8.238:3000/api/doktorlar/";
+    var url = "http://37.75.8.238:3000/api/doktorlar";
     final response = await http.get(Uri.parse(url));
 
     var responseData = json.decode(response.body);
@@ -16,7 +16,7 @@ Future<List<Doktor>> doktorGetRequest() async {
     List<Doktor> doktorlar = [];
     for (var singleDoktor in responseData) {
       Doktor doktor = Doktor(
-          doktor_SIFRE: singleDoktor["doktor_MAIL"],
+          doktor_SIFRE: singleDoktor["doktor_SIFRE"],
           doktor_ID: singleDoktor["doktor_ID"],
           doktor_ISIM: singleDoktor["doktor_ISIM"],
           doktor_SOYISIM: singleDoktor["doktor_SOYISIM"],
@@ -50,7 +50,7 @@ Future<List<Doktor>> doktorGetRequest() async {
   }
   Future<List<Hasta>> hastaGetRequest() async {
     //replace your restFull API here.
-    var url = "http://37.75.8.238:3000/api/hastalar/";
+    var url = "http://37.75.8.238:3000/api/hastalar";
     final response = await http.get(Uri.parse(url));
 
     var responseData = json.decode(response.body);
@@ -59,7 +59,7 @@ Future<List<Doktor>> doktorGetRequest() async {
     List<Hasta> hastalar = [];
     for (var singleHasta in responseData) {
       Hasta hasta = Hasta(
-          hasta_SIFRE: singleHasta["hasta_MAIL"],
+          hasta_SIFRE: singleHasta["hasta_SIFRE"],
           hasta_ID: singleHasta["hasta_ID"],
           hasta_ISIM: singleHasta["hasta_ISIM"],
           hasta_SOYISIM: singleHasta["hasta_SOYISIM"],
@@ -72,7 +72,7 @@ Future<List<Doktor>> doktorGetRequest() async {
   }
   Future<List<Uzmanlik>> uzmanlikGetRequest() async {
     //replace your restFull API here.
-    var url = "http://37.75.8.238:3000/api/doktorlar/uzmanlik/";
+    var url = "http://37.75.8.238:3000/api/doktorlar/uzmanlik";
     final response = await http.get(Uri.parse(url));
 
     var responseData = json.decode(response.body);
@@ -84,7 +84,7 @@ Future<List<Doktor>> doktorGetRequest() async {
           doktor_ID: singleUzman['doktor_ID'],
           doktor_ISIM: singleUzman['doktor_ISIM'],
           doktor_SOYISIM: singleUzman['doktor_SOYISIM'],
-          uzmanlik_ISIM: singleUzman('uzmanlik_isim')
+          uzmanlik_ISIM: singleUzman['uzmanlik_isim']
           );
       //Adding user to the list.
       uzmanliklar.add(uzman);
@@ -93,7 +93,7 @@ Future<List<Doktor>> doktorGetRequest() async {
   }
   Future<List<Mesaj>> mesajGetRequest() async {
     //replace your restFull API here.
-    var url = "http://37.75.8.238:3000/api/mesajlar/";
+    var url = "http://37.75.8.238:3000/api/mesajlar";
     final response = await http.get(Uri.parse(url));
 
     var responseData = json.decode(response.body);
@@ -108,7 +108,8 @@ Future<List<Doktor>> doktorGetRequest() async {
           mesaj: singleMesaj['mesaj'],
           eklenti_path: singleMesaj['eklenti_path'],
           mesaj_tarihi: singleMesaj['mesaj_tarihi'],
-          gonderen: singleMesaj['gonderen']== 'doktor'? false : true,
+          gonderen: singleMesaj['gonderen']
+          //gonderen: singleMesaj['gonderen']== 'doktor'? false : true,
 
           );
       //Adding user to the list.

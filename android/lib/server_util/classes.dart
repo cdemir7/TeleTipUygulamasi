@@ -16,7 +16,7 @@ class Doktor {
   });
 }
 class Abd {
-  final String doktor_ID;
+  final int doktor_ID;
   final String doktor_ISIM;
   final String doktor_SOYISIM;
   final String abd_ISIM;
@@ -46,7 +46,7 @@ class Hasta {
   });
 }
 class Uzmanlik {
-  final String doktor_ID;
+  final int doktor_ID;
   final String doktor_ISIM;
   final String doktor_SOYISIM;
   final String uzmanlik_ISIM;
@@ -61,12 +61,12 @@ class Uzmanlik {
 }
 class Mesaj {// gonderen degeri 0 ise doktor 1 ise hasta
   final int mesaj_ID;
-  final String doktor_ID;
-  final String hasta_ID;
+  final int doktor_ID;
+  final int hasta_ID;
   final String mesaj;
   final String? eklenti_path;
   final String? mesaj_tarihi;
-  final bool gonderen;
+  final String gonderen;
 
   Mesaj(
     {
