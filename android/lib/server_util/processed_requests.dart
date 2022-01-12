@@ -1,6 +1,7 @@
+import 'package:android/server_util/classes.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:sulo/classes.dart';
+
 
 Future doktorEkraniSorgusu(String doktor_MAIL, String doktor_SIFRE) async {
     //replace your restFull API here.
@@ -59,6 +60,29 @@ Future<List<Mesaj>> mesajEkraniSorgusu(int doktor_Id, int hasta_ID) async {
 
     return mesajlar;
 }
+Future<List<Abd>> abdDoktor(String abd_START) async {
+    //  abd_START ile baslayan anabilim dalina mensup doktorlari serverdan ceker
+    var url = "http://37.75.8.238:3000/api/doktorlar/anabilimdali";
+    final response = await http.get(Uri.parse(url));
+
+    var responseData = json.decode(response.body);
+
+    //Creating a list to store input data;
+    List<Abd> abdler = [];
+    for (var singleAbd in responseData) {
+      Abd abd = Abd(
+        abd_ISIM: singleAbd['abd_isim'],
+        doktor_ID: singleAbd['doktor_ID'],
+        doktor_ISIM: singleAbd['doktor_ISIM'],
+        doktor_SOYISIM: singleAbd['doktor_SOYISIM']);
+
+      //Adding user to the list.
+      if(abd.abd_ISIM.startsWith(abd_START)){
+        abdler.add(abd);
+      }
+    }
+    return abdler;
+}
 mesajGonder(String mesaj, int doktor_ID, int hasta_ID, String gonderen){}
 essizMesajListesi(int doktor_ID, int hasta_ID){}
 doktorAyarGorunumu(int doktor_ID){}
@@ -68,7 +92,6 @@ hastaEkraniSorgusu(String hasta_MAIL, String hasta_SIFRE){}
 hastaKayit(String hasta_ISIM, String hasta_SOYAD, String hasta_MAIL, String hasta_SIFRE){}
 isimDoktor(String doktor_ISIM){}
 uzmanlikDoktor(String uzmanlik_ISIM){}
-abdDoktor(String abd_ISIM){}
 hastaAyarGorunumu(int hasta_ID){}
 hastaAyarDegisimi(int hasta_ID, String hasta_ISIM, String hasta_SOYISIM, String hasta_SIFRE){}
 

@@ -1,9 +1,9 @@
 
 
+import 'package:android/server_util/classes.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:sulo/classes.dart';
 
 Future<List<Doktor>> doktorGetRequest() async {
     //replace your restFull API here.
