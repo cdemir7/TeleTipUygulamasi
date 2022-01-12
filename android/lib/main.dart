@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:android/global_degisgenler.dart';
 import 'Screens/giris_ekrani.dart';
+
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Tele Tip',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColorLight: Colors.lightBlueAccent,
-        scaffoldBackgroundColor: Colors.white,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("TELE-TIP UYGULAMASI"),
+        ),
+        body: AnaGirisEkrani(),
       ),
-      home: Giris_Ekrani(),
     );
   }
 }
