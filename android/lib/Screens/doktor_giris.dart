@@ -1,8 +1,25 @@
+import 'package:deneme_1/server_util/processed_requests.dart';
 import 'package:flutter/material.dart';
 import './doktor_ana_ekrani.dart';
+import 'package:deneme_1/server_util/classes.dart';
 
 class Doktor_Giris extends StatelessWidget {
-  const Doktor_Giris({Key? key}) : super(key: key);
+  // const Doktor_Giris({Key? key}) : super(key: key);
+  TextEditingController epostaController = TextEditingController();
+  TextEditingController sifreController = TextEditingController();
+
+  static int id = 123;
+  static String ad = "Kanber";
+  static String soyad = "Kanberoğlu";
+  static String eposta = "kanber@gmail.com";
+  static String sifre = "12341234";
+
+  Doktor doktor = Doktor(
+      doktor_ID: id,
+      doktor_ISIM: ad,
+      doktor_SOYISIM: soyad,
+      doktor_MAIL: eposta,
+      doktor_SIFRE: sifre);
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +33,7 @@ class Doktor_Giris extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             child: TextField(
+              controller: epostaController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Mail adresinizi Giriniz ....',
@@ -25,6 +43,7 @@ class Doktor_Giris extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             child: TextFormField(
+              controller: sifreController,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Şifrenizi Giriniz...',
@@ -41,14 +60,17 @@ class Doktor_Giris extends StatelessWidget {
               ),
               children: [
                 RaisedButton(
-                  child: Text("Giriş"),
-                  textColor: Colors.white,
-                  color: Colors.lightBlueAccent,
-                  onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Doktor_Ana_Ekrani())),
-                ),
+                    child: Text("Giriş"),
+                    textColor: Colors.white,
+                    color: Colors.lightBlueAccent,
+                    onPressed: () {
+                      doktorGirisSorgusu(eposta, sifre);
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Doktor_Ana_Ekrani(doktor)));
+                    }),
               ],
             ),
           ),

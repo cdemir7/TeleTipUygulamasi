@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import './hasta_profil_duzenleme.dart';
+import 'package:deneme_1/server_util/classes.dart';
+import 'package:deneme_1/server_util/processed_requests.dart';
 
 class HastaProfilEkrani extends StatefulWidget {
-  const HastaProfilEkrani({Key? key}) : super(key: key);
+  // const HastaProfilEkrani({Key? key}) : super(key: key);
+  Hasta hasta;
+  HastaProfilEkrani(this.hasta);
 
   @override
   _HastaProfilEkraniState createState() => _HastaProfilEkraniState();
 }
 
 class _HastaProfilEkraniState extends State<HastaProfilEkrani> {
-  String hastaAdi = "HASTA ADI";
-  String hastaSoyadi = "HASTA SOYADI";
-  String hastaEpostasi = "HASTA E-POSTA'SI";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +38,7 @@ class _HastaProfilEkraniState extends State<HastaProfilEkrani> {
               ),
               SizedBox(width: 60),
               Text(
-                hastaAdi,
+                widget.hasta.hasta_ISIM,
                 style: TextStyle(fontSize: 20),
               ),
             ],
@@ -52,7 +53,7 @@ class _HastaProfilEkraniState extends State<HastaProfilEkrani> {
               ),
               SizedBox(width: 25),
               Text(
-                hastaSoyadi,
+                widget.hasta.hasta_SOYISIM,
                 style: TextStyle(fontSize: 20),
               )
             ],
@@ -67,7 +68,7 @@ class _HastaProfilEkraniState extends State<HastaProfilEkrani> {
               ),
               SizedBox(width: 5),
               Text(
-                hastaEpostasi,
+                widget.hasta.hasta_MAIL,
                 style: TextStyle(fontSize: 20),
               ),
             ],
@@ -78,7 +79,7 @@ class _HastaProfilEkraniState extends State<HastaProfilEkrani> {
             onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => HastaProfilDuzenleme())),
+                    builder: (context) => HastaProfilDuzenleme(widget.hasta))),
           ),
         ],
       ),

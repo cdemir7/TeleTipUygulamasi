@@ -1,4 +1,4 @@
-import 'package:android/Screens/doktor_giris.dart';
+import 'package:deneme_1/Screens/doktor_giris.dart';
 import 'package:flutter/material.dart';
 import './hasta_giris.dart';
 

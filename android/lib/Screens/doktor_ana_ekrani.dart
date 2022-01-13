@@ -1,9 +1,13 @@
+import 'package:deneme_1/server_util/classes.dart';
 import 'package:flutter/material.dart';
 import './doktor_giris.dart';
 import './doktor_profil_ekrani.dart';
 
 class Doktor_Ana_Ekrani extends StatefulWidget {
-  const Doktor_Ana_Ekrani({Key? key}) : super(key: key);
+  // const Doktor_Ana_Ekrani({Key? key}) : super(key: key);
+  Doktor doktor;
+
+  Doktor_Ana_Ekrani(this.doktor);
 
   @override
   _Doktor_Ana_EkraniState createState() => _Doktor_Ana_EkraniState();
@@ -54,7 +58,7 @@ class _Doktor_Ana_EkraniState extends State<Doktor_Ana_Ekrani> {
         children: [
           Center(
             child: Text(
-              'Doktor...... Hoşgeldiniz',
+              widget.doktor.doktor_ISIM,
               style: TextStyle(fontSize: 20),
             ),
           ),
@@ -113,7 +117,7 @@ class _Doktor_Ana_EkraniState extends State<Doktor_Ana_Ekrani> {
               onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => DoktorProfilEkrani())),
+                      builder: (context) => DoktorProfilEkrani(widget.doktor))),
             ),
           ]),
         ],
