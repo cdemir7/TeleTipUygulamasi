@@ -1,8 +1,10 @@
+import 'package:deneme_1/server_util/classes.dart';
 import 'package:flutter/material.dart';
-import 'package:android/Screens/doktor_profil_edit.dart';
+import 'package:deneme_1/Screens/doktor_profil_edit.dart';
 
 class DoktorProfilEkrani extends StatefulWidget {
-  const DoktorProfilEkrani({Key? key}) : super(key: key);
+  Doktor doktor;
+  DoktorProfilEkrani(this.doktor);
 
   @override
   _DoktorProfilEkraniState createState() => _DoktorProfilEkraniState();
@@ -45,7 +47,7 @@ class _DoktorProfilEkraniState extends State<DoktorProfilEkrani> {
                 ),
                 SizedBox(width: 60),
                 Text(
-                  doktorAdi,
+                  widget.doktor.doktor_ISIM,
                   style: TextStyle(fontSize: 20),
                 ),
               ],
@@ -60,7 +62,7 @@ class _DoktorProfilEkraniState extends State<DoktorProfilEkrani> {
                 ),
                 SizedBox(width: 25),
                 Text(
-                  doktorSoyadi,
+                  widget.doktor.doktor_SOYISIM,
                   style: TextStyle(fontSize: 20),
                 )
               ],
@@ -75,7 +77,7 @@ class _DoktorProfilEkraniState extends State<DoktorProfilEkrani> {
                 ),
                 SizedBox(width: 5),
                 Text(
-                  doktorEpostasi,
+                  widget.doktor.doktor_MAIL,
                   style: TextStyle(fontSize: 20),
                 ),
               ],
@@ -94,7 +96,7 @@ class _DoktorProfilEkraniState extends State<DoktorProfilEkrani> {
               children: [
                 SizedBox(width: 5),
                 Text(
-                  doktorAnabilimDali,
+                  "doktorun abdleri çekilmemiş",
                   style: TextStyle(fontSize: 20),
                 ),
               ],
@@ -132,8 +134,10 @@ class _DoktorProfilEkraniState extends State<DoktorProfilEkrani> {
             SizedBox(height: 20),
             RaisedButton(
               child: Text("PROFİLİ DÜZENLE"),
-              onPressed: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => DoktorProfilEdit())),
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => DoktorProfilEdit(widget.doktor))),
             ),
           ],
         ),

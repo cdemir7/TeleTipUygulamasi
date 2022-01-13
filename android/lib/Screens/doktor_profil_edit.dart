@@ -1,8 +1,11 @@
-import 'package:android/Screens/doktor_profil_ekrani.dart';
+import 'package:deneme_1/Screens/doktor_profil_ekrani.dart';
+import 'package:deneme_1/server_util/classes.dart';
 import 'package:flutter/material.dart';
 
 class DoktorProfilEdit extends StatefulWidget {
-  DoktorProfilEdit({Key? key}) : super(key: key);
+  Doktor doktor;
+
+  DoktorProfilEdit(this.doktor);
 
   @override
   _DoktorProfilEditState createState() => _DoktorProfilEditState();
@@ -106,7 +109,8 @@ class _DoktorProfilEditState extends State<DoktorProfilEdit> {
                     onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => DoktorProfilEkrani())),
+                            builder: (context) =>
+                                DoktorProfilEkrani(widget.doktor))),
                     child: Text("KAYDET"),
                   ),
                 ],

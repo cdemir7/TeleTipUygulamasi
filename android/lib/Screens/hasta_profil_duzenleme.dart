@@ -1,13 +1,24 @@
+import 'package:deneme_1/server_util/classes.dart';
 import 'package:flutter/material.dart';
 
 class HastaProfilDuzenleme extends StatefulWidget {
-  const HastaProfilDuzenleme({Key? key}) : super(key: key);
-
+  // const HastaProfilDuzenleme({Key? key}) : super(key: key);
+  Hasta hasta;
+  HastaProfilDuzenleme(this.hasta);
   @override
   _HastaProfilDuzenlemeState createState() => _HastaProfilDuzenlemeState();
 }
 
 class _HastaProfilDuzenlemeState extends State<HastaProfilDuzenleme> {
+  TextEditingController adController = TextEditingController();
+  TextEditingController soyadController = TextEditingController();
+
+  TextEditingController sifreController = TextEditingController();
+
+  String ad = "Mehmet";
+  String soyad = "Köksal";
+  String sifre = "121212";
+  String sifreTekrar = "121212";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +45,7 @@ class _HastaProfilDuzenlemeState extends State<HastaProfilDuzenleme> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: TextFormField(
+                controller: adController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'AD',
@@ -43,6 +55,7 @@ class _HastaProfilDuzenlemeState extends State<HastaProfilDuzenleme> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: TextFormField(
+                controller: soyadController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'SOYAD',
@@ -52,18 +65,10 @@ class _HastaProfilDuzenlemeState extends State<HastaProfilDuzenleme> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: TextFormField(
+                controller: sifreController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'YENİ ŞİFRE',
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'YENİ ŞİFRE TEKRAR',
                 ),
               ),
             ),

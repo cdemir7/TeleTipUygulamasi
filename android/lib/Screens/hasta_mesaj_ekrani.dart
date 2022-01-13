@@ -7,41 +7,35 @@ class Hasta_Mesaj_Ekrani extends StatefulWidget {
   _Hasta_Mesaj_EkraniState createState() => _Hasta_Mesaj_EkraniState();
 }
 
-String Hasta(var ad, var y) => "$ad $y";
+String Hastaa(var ad, var y) => "$ad $y";
 
 class _Hasta_Mesaj_EkraniState extends State<Hasta_Mesaj_Ekrani> {
   @override
   List<String> konusmalarim = [
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
-    Hasta('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
+    Hastaa('scc', 'csa'),
   ];
 
   Widget build(BuildContext context) {
