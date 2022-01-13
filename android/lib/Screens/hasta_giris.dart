@@ -21,8 +21,8 @@ class Hasta_Giris extends StatelessWidget {
       hasta_MAIL: eposta,
       hasta_SIFRE: sifre);
 
-  TextEditingController mailController = TextEditingController();
-  TextEditingController sifreController = TextEditingController();
+  final mailController = TextEditingController();
+  final sifreController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

@@ -4,15 +4,18 @@ import './doktor_ana_ekrani.dart';
 import 'package:deneme_1/server_util/classes.dart';
 
 class Doktor_Giris extends StatelessWidget {
-  // const Doktor_Giris({Key? key}) : super(key: key);
-  TextEditingController epostaController = TextEditingController();
-  TextEditingController sifreController = TextEditingController();
+  //Doktor_Giris({Key? key}) : super(key: key);
+  final epostaController = TextEditingController();
+  final sifreController = TextEditingController();
 
+  @override
   static int id = 123;
   static String ad = "Kanber";
   static String soyad = "Kanberoğlu";
   static String eposta = "kanber@gmail.com";
   static String sifre = "12341234";
+
+  //Doktor doktor2 = doktorGirisSorgusu(eposta, sifre);
 
   Doktor doktor = Doktor(
       doktor_ID: id,
@@ -25,13 +28,13 @@ class Doktor_Giris extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("DOKTOR GİRİŞ EKRANI"),
+        title: const Text("DOKTOR GİRİŞ EKRANI"),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             child: TextField(
               controller: epostaController,
               decoration: InputDecoration(
@@ -42,11 +45,13 @@ class Doktor_Giris extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child: TextFormField(
-              controller: sifreController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Şifrenizi Giriniz...',
+            child: Material(
+              child: TextFormField(
+                controller: sifreController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Şifrenizi Giriniz...',
+                ),
               ),
             ),
           ),
@@ -64,7 +69,11 @@ class Doktor_Giris extends StatelessWidget {
                     textColor: Colors.white,
                     color: Colors.lightBlueAccent,
                     onPressed: () {
-                      doktorGirisSorgusu(eposta, sifre);
+                      /*    var nesne = doktorGirisSorgusu(
+                          epostaController.text, sifreController.text); */
+
+                      print(epostaController.text);
+                      print(sifreController.text);
 
                       Navigator.push(
                           context,

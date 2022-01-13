@@ -1,4 +1,5 @@
 import 'package:deneme_1/server_util/classes.dart';
+import 'package:deneme_1/server_util/processed_requests.dart';
 import 'package:flutter/material.dart';
 
 class HastaProfilDuzenleme extends StatefulWidget {
@@ -10,15 +11,10 @@ class HastaProfilDuzenleme extends StatefulWidget {
 }
 
 class _HastaProfilDuzenlemeState extends State<HastaProfilDuzenleme> {
-  TextEditingController adController = TextEditingController();
-  TextEditingController soyadController = TextEditingController();
+  final adController = TextEditingController();
+  final soyadController = TextEditingController();
+  final sifreController = TextEditingController();
 
-  TextEditingController sifreController = TextEditingController();
-
-  String ad = "Mehmet";
-  String soyad = "Köksal";
-  String sifre = "121212";
-  String sifreTekrar = "121212";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +72,12 @@ class _HastaProfilDuzenlemeState extends State<HastaProfilDuzenleme> {
               child: Text("Güncelle"),
               textColor: Colors.white,
               color: Colors.lightBlueAccent,
-              onPressed: () {},
+              onPressed: () {
+                hastaAyarDegisimi(widget.hasta.hasta_ID,
+                    hasta_ISIM: adController.text,
+                    hasta_SOYISIM: soyadController.text,
+                    hasta_SIFRE: sifreController.text);
+              },
             ),
           ],
           alignment: WrapAlignment.center,

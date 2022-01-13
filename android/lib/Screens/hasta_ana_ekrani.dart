@@ -19,24 +19,29 @@ class _Hasta_Ana_EkraniState extends State<Hasta_Ana_Ekrani> {
   String uzmanligagore = "uzmanlık alanı";
   String abdgore = "abd adı";
 
+// i değişkeni listelemenin ad, uzmanli ve ya abd' ye göre yapılmasını seçiyor
   int i = 0;
 
+  // neye göre listelenecekse(ad,uzmanlık,abd) ona göre durumu değiştiriyor
+  // arama butonlarına basıldığında çalışıyor
   void idegistir(int yeni) {
     setState(() {
       i = yeni;
     });
   }
 
+  // butonların gönderdiği i değişkenine göre veritabanından arama
+  //      yapan fonksiyonları çağırıyor
   doktorGetir(String param) {
-    if (i == 3)
-      return abdDoktor(param);
-    else if (i == 1) return isimDoktor(param);
-
-    return uzmanlikDoktor(param);
+    if (i == 3) {
+      return abdDoktor(controller.text);
+    } else if (i == 1) {
+      return isimDoktor(controller.text);
+    }
+    return uzmanlikDoktor(controller.text);
   }
 
-  String param = "Arif";
-  TextEditingController controller = TextEditingController();
+  final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,27 +91,38 @@ class _Hasta_Ana_EkraniState extends State<Hasta_Ana_Ekrani> {
               SizedBox(
                 height: 50.0,
               ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child: TextField(
+                  controller: controller,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
               Container(
                 child: Row(
                   children: [
+                    SizedBox(width: 18),
                     RaisedButton(
                         highlightColor: Colors.lightBlueAccent,
                         padding: EdgeInsets.symmetric(horizontal: 1),
                         elevation: 10.0,
                         child: Text(
-                          'Ada Göre',
+                          'Ada Göre Ara',
                           style: TextStyle(fontSize: 13.5),
                         ),
                         onPressed: () {
                           idegistir(1);
                         }),
-                    SizedBox(width: 40),
+                    SizedBox(width: 20),
                     RaisedButton(
                       highlightColor: Colors.lightBlueAccent,
                       padding: EdgeInsets.symmetric(horizontal: 1),
                       elevation: 10.0,
                       child: Text(
-                        'Uzmanlığa Göre',
+                        'Uzmanlığa Göre Ara',
                         style: TextStyle(fontSize: 13.5),
                       ),
                       onPressed: () {
@@ -114,14 +130,14 @@ class _Hasta_Ana_EkraniState extends State<Hasta_Ana_Ekrani> {
                       },
                     ),
                     SizedBox(
-                      width: 40,
+                      width: 20,
                     ),
                     RaisedButton(
                       highlightColor: Colors.lightBlueAccent,
                       padding: EdgeInsets.symmetric(horizontal: 1),
                       elevation: 10.0,
                       child: Text(
-                        "ABD'ye Göre",
+                        "ABD'ye Göre Ara",
                         style: TextStyle(
                           fontSize: 13.5,
                         ),
@@ -133,26 +149,6 @@ class _Hasta_Ana_EkraniState extends State<Hasta_Ana_Ekrani> {
                   ],
                 ),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child: TextField(
-                  controller: controller,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-              ),
-              RaisedButton(
-                highlightColor: Colors.lightBlueAccent,
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                elevation: 10.0,
-                child: Text(
-                  'LİSTELE',
-                  style: TextStyle(fontSize: 13.5),
-                ),
-                onPressed: () {},
-              ),
               SizedBox(
                 height: 20,
               ),
@@ -160,7 +156,7 @@ class _Hasta_Ana_EkraniState extends State<Hasta_Ana_Ekrani> {
                 height: 280,
                 padding: EdgeInsets.all(16.0),
                 child: FutureBuilder(
-                  future: doktorGetir(param),
+                  future: doktorGetir(controller.text),
                   builder: (BuildContext ctx, AsyncSnapshot snapshot) {
                     if (snapshot.data == null) {
                       return Container(
