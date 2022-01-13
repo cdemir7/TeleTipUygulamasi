@@ -251,7 +251,7 @@ bool essizmi(List<Mesaj> liste, Mesaj mesaj, String kimden){
   }
 }
 
-Future<http.Response> hastaAyarDegisimi(int hasta_ID, {String? hasta_ISIM = null, String? hasta_SOYISIM, String? hasta_SIFRE, String? hasta_FOTO}) async{
+Future<http.Response> hastaAyarDegisimi(int hasta_ID, {String? hasta_ISIM , String? hasta_SOYISIM, String? hasta_SIFRE, String? hasta_FOTO}) async{
   // hasta girdilerdeki isim soyisim sifre alanlarini bos biraktiysa bu fonksiyonu cagirirken oraya null yaz
   Hasta hasta = await hastaAyarGorunumu(hasta_ID);
   if (hasta_SIFRE == null) {
