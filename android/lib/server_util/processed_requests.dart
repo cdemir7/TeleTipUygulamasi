@@ -5,34 +5,35 @@ import 'dart:convert';
 
 
 Future doktorGirisSorgusu(String doktor_MAIL, String doktor_SIFRE) async {
-    //replace your restFull API here.
-    var url = "http://37.75.8.238:3000/api/doktorlar/";
-    final response = await http.get(Uri.parse(url));
-
-    var responseData = json.decode(response.body);
-
-    //Creating a list to store input data;
-    List<Doktor> doktorlar = [];
-    for (var singleDoktor in responseData) {
-      Doktor doktor = Doktor(
-          doktor_SIFRE: singleDoktor["doktor_SIFRE"],
-          doktor_ID: singleDoktor["doktor_ID"],
-          doktor_ISIM: singleDoktor["doktor_ISIM"],
-          doktor_SOYISIM: singleDoktor["doktor_SOYISIM"],
-          doktor_MAIL: singleDoktor["doktor_MAIL"]
-          );
-      //Adding user to the list.
-      doktorlar.add(doktor);
-    }
-  int pass = 0;
-  for (var item in doktorlar) {
+  // Doktor giris ekraninda girilen mail ve sifreyi kontrol eder
+  // doktorun varolmasi durumunda cagirildigi yere 0 ve doktorun bilgilarini dondurur
+  // var olmamasi duruminda cagirildigi yere 1 ve null dondurur
+  
+  List<Doktor> doktorList = await doktorGetRequest();
+  
+  for (var item in doktorList) {
     if(item.doktor_MAIL == doktor_MAIL && item.doktor_SIFRE == doktor_SIFRE)
     {
-      return item.doktor_MAIL + " " + item.doktor_SIFRE;
+      return {'durum': 0, 'doktor':item};
     }
   }
-  return "OKUMUYOR";
+  return {'durum': 1, 'doktor': null};
 }
+Future hastaGirisSorgusu(String hasta_MAIL, String hasta_SIFRE)async{
+  // Hasta giriş ekranında girilen mail ve şifreyi kontrol eder
+  // Hastanın varolması durumunda çağırıldığı yere 0 ve hastanın bilgilerini dödürür
+  // Hastanın varolmaması ya da hatalı giriş durumunda 1 ve null dödürür
+
+  List<Hasta> hastaList = await hastaGetRequest();
+  
+  for (var item in hastaList) {
+    if(hasta_MAIL == item.hasta_MAIL && hasta_SIFRE == item.hasta_SIFRE){
+      return {'durum':0, 'hasta':item};
+    }
+  }
+  return {'durum':1,'hasta': null};
+}
+
 Future<List<Mesaj>> mesajEkraniSorgusu(int doktor_ID, int hasta_ID) async {
     //replace your restFull API here.
     var url = "http://37.75.8.238:3000/api/mesajlar/";
@@ -180,18 +181,6 @@ hastaAyarGorunumu(int hasta_ID)async{
 }
 
 
-hastaGirisSorgusu(String hasta_MAIL, String hasta_SIFRE)async{
-  // eger hastanin girdigi email ve sifre gecerli ise hasta_ID si dondurulur 
-  // yanlis giris yapildiysa -1 dondurulur
-  List<Hasta> hastaList = await hastaGetRequest();
-  for (var item in hastaList) {
-    if(hasta_MAIL == item.hasta_MAIL && hasta_SIFRE == item.hasta_SIFRE){
-      return item.hasta_ID;
-    }
-  }
-  return -1;
-}
-
 
 
 
@@ -216,9 +205,6 @@ hastaEkraniDoktor(int hasta_ID) async{// buglu
       }
     }
   }
-  /* for (var item in essizDoktorListesi) {
-    debugPrint(item.doktor_ID.toString()+" "+item.doktor_ISIM+" "+item.doktor_SOYISIM);
-  } */
   return essizDoktorListesi;
 }
 doktorEkraniHasta(int doktor_ID) async{
@@ -248,24 +234,19 @@ doktorEkraniHasta(int doktor_ID) async{
 
 bool essizmi(List<Mesaj> liste, Mesaj mesaj, String kimden){
   if(kimden.toLowerCase() == 'doktor'){ // doktorun listesinde ayni hastandan varmi diye kontrol edilir
-    
     for (var item in liste) {
       if (mesaj.hasta_ID == item.hasta_ID) {
         return false;
       }
     }
-
     return true;
   }
   else{ // hastanin listesinde ayni doktordan varmi diye kontrol edilir
-
     for (var item in liste) {
       if (mesaj.doktor_ID == item.doktor_ID) {
-
         return false;
       }
     }
-
     return true;
   }
 }
