@@ -12,8 +12,11 @@ class DoktorProfilEdit extends StatefulWidget {
 }
 
 class _DoktorProfilEditState extends State<DoktorProfilEdit> {
-  String doktorAdi = "DOKTOR ADI";
-  String doktorSoyadi = "DOKTOR SOYADI";
+  String doktorAdi = "AD";
+  String doktorSoyadi = "SOYAD";
+  final adController = TextEditingController();
+  final soyadController = TextEditingController();
+  final sifreController = TextEditingController();
 
   List<bool> dene = [false, false, false, false, false];
   bool isChecked = false;
@@ -40,7 +43,7 @@ class _DoktorProfilEditState extends State<DoktorProfilEdit> {
               ),
               SizedBox(height: 10),
               TextField(
-                //controller: t1,
+                controller: adController,
                 cursorColor: Colors.black,
                 maxLength: 20,
                 decoration: InputDecoration(
@@ -49,7 +52,7 @@ class _DoktorProfilEditState extends State<DoktorProfilEdit> {
                 ),
               ),
               TextField(
-                //controller: t1,
+                controller: soyadController,
                 cursorColor: Colors.black,
                 maxLength: 20,
                 decoration: InputDecoration(
@@ -58,7 +61,7 @@ class _DoktorProfilEditState extends State<DoktorProfilEdit> {
                 ),
               ),
               TextField(
-                //controller: t1,
+                controller: sifreController,
                 cursorColor: Colors.black,
                 maxLength: 20,
                 decoration: InputDecoration(
@@ -66,42 +69,6 @@ class _DoktorProfilEditState extends State<DoktorProfilEdit> {
                   hintText: "YENİ ŞİFRE",
                 ),
               ),
-              TextField(
-                //controller: t1,
-                cursorColor: Colors.black,
-                maxLength: 20,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: "YENİ ŞİFRE TEKRAR",
-                ),
-              ),
-              /*Row(
-                children: [
-                  SizedBox(width: 30),
-                  Text(
-                    "UZMANLIK ALANLARI:",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-               Container(
-                height: 200,
-                child: ListView.builder(
-                  itemCount: uzmanlikAlanlari.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return CheckboxListTile(
-                      title: Text(uzmanlikAlanlari[index]),
-                      controlAffinity: ListTileControlAffinity.leading,
-                      value: dene[index],
-                      onChanged: (bool? value) {
-                        setState(() {
-                          dene[index] = value!;
-                        });
-                      },
-                    );
-                  },
-                ),
-              ), */
               Wrap(
                 children: [
                   SizedBox(width: 5),

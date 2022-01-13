@@ -1,6 +1,4 @@
-//satır 17-20 arasındaki değişkenler deneme yapmak için oluşturuldu
-//controller lar çalışmıyor
-//satır 71 kayıt işlemini yapıyor. şuan yorum satırında
+//kayıt işlemi buton içinde yorum satırında
 
 import 'package:deneme_1/server_util/classes.dart';
 import 'package:deneme_1/server_util/processed_requests.dart';
@@ -15,22 +13,17 @@ class HastaKayitEkrani extends StatefulWidget {
 }
 
 class _HastaKayitEkraniState extends State<HastaKayitEkrani> {
-  //bunlar geçici olarak tutuluyor. controller lar çalışmıyor
-  static String ad = "Mustafa";
-  static String soyad = "Uysal";
-  static String eposta = "mustafa@gmail.com";
-  static String sifre = "123123123";
-
-  TextEditingController adController = TextEditingController();
-  TextEditingController soyadController = TextEditingController();
-  TextEditingController ePostaController = TextEditingController();
-  TextEditingController sifreController = TextEditingController();
+  // TextField içeriklerini tutan kontrolcüler
+  final adController = TextEditingController();
+  final soyadController = TextEditingController();
+  final ePostaController = TextEditingController();
+  final sifreController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("HASTA KAYIT EKRANI"),
+        title: const Text("HASTA KAYIT EKRANI"),
       ),
       body: Container(
         child: Column(
@@ -43,7 +36,7 @@ class _HastaKayitEkraniState extends State<HastaKayitEkrani> {
                 labelText: 'AD',
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextFormField(
               controller: soyadController,
               decoration: const InputDecoration(
@@ -51,7 +44,7 @@ class _HastaKayitEkraniState extends State<HastaKayitEkrani> {
                 labelText: 'SOYAD',
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextFormField(
               controller: ePostaController,
               decoration: const InputDecoration(
@@ -59,7 +52,7 @@ class _HastaKayitEkraniState extends State<HastaKayitEkrani> {
                 labelText: 'E-POSTA',
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextFormField(
               controller: sifreController,
               decoration: const InputDecoration(
@@ -69,12 +62,13 @@ class _HastaKayitEkraniState extends State<HastaKayitEkrani> {
             ),
             RaisedButton(
               onPressed: () {
-                hastaKayit(ad, soyad, eposta, sifre);
+                /* hastaKayit(adController.text, soyadController.text,
+                    ePostaController.text, sifreController.text); */
 
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => Hasta_Giris()));
               },
-              child: Text("KAYIT OL"),
+              child: const Text("KAYIT OL"),
             ),
           ],
         ),
