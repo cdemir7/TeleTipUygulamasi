@@ -116,9 +116,6 @@ Future<http.Response> mesajGonder(int doktor_ID, int hasta_ID, String mesaj, Str
     'mesaj':mesaj,
     'gonderen':gonderen}));
 }
-
-doktorAyarDegisim(int dokot_ID, String doktor_ISIM, String doktor_SOYISIM, String doktor_SIFRE){}
-
 isimDoktor(String doktor_START)async{
   // isime gore doktor arar
   List<Doktor> eskiDoktorList = await doktorGetRequest();
@@ -131,7 +128,35 @@ isimDoktor(String doktor_START)async{
   }
   return yeniDoktorList;
 }
-
+doktorAyarGorunumu(int doktor_ID)async{
+  List<Doktor> doktorList= await doktorGetRequest();
+  List<Abd>    abdList = await abdGetRequest();
+  List<Uzmanlik>uzmanlikList = await uzmanlikGetRequest();
+  var doktor = new Map<dynamic, dynamic>();
+  var uzmanliklari = new Set();
+  for (var item in doktorList) {
+    if (item.doktor_ID == doktor_ID) {
+      doktor['doktor_ID'] = doktor_ID;
+      doktor['doktor_ISIM']= item.doktor_ISIM;
+      doktor['doktor_SOYISIM']= item.doktor_SOYISIM;
+      doktor['doktor_MAIL']= item.doktor_MAIL;
+      doktor['doktor_SIFRE']= item.doktor_SIFRE;
+    }
+  }
+  for (var item2 in abdList) {
+    if (item2.doktor_ID == doktor_ID) {
+      doktor['abd_ISIM'] = item2.abd_ISIM;
+    }
+  }
+  
+  for (var item3 in uzmanlikList) {
+    if (item3.doktor_ID==doktor_ID) {
+      uzmanliklari.add(item3.uzmanlik_ISIM);
+    }
+  }
+  doktor['uzmanlik_ISIM'] = uzmanliklari.toList();
+  return doktor;
+}
 uzmanlikDoktor(String uzmanlik_START) async{
   List <Uzmanlik> eskiList = await uzmanlikGetRequest();
   List <Uzmanlik> yeniList = [];
@@ -142,112 +167,164 @@ uzmanlikDoktor(String uzmanlik_START) async{
     return yeniList;
   }
 }
-hastaGirisSorgusu(String hasta_MAIL, String hasta_SIFRE){}
-hastaAyarDegisimi(int hasta_ID, String hasta_ISIM, String hasta_SOYISIM, String hasta_SIFRE){}
-
-
-
-
-
-
-/* Future <Doktor> doktorAyarGorunumu(int doktor_ID)async{
-  var url = "http://37.75.8.238:3000/api/doktorlar";
-  final response = await http.get(Uri.parse(url));
-
-  var responseData = json.decode(response.body);
-
-  List<Doktor> doktorlar = [];
-  for (var singleDoktor in responseData) {
-    Doktor doktor = Doktor(
-    doktor_SIFRE: singleDoktor["doktor_SIFRE"],
-    doktor_ID: singleDoktor["doktor_ID"],
-    doktor_ISIM: singleDoktor["doktor_ISIM"],
-    doktor_SOYISIM: singleDoktor["doktor_SOYISIM"],
-    doktor_MAIL: singleDoktor["doktor_MAIL"]
-    );
-    doktorlar.add(doktor);
-  }
-  for (var item in doktorlar) {
-    if(item.doktor_ID == doktor_ID){
+hastaAyarGorunumu(int hasta_ID)async{
+  List <Hasta> hastaList = await hastaGetRequest();
+  for (var item in hastaList) {
+    if (item.hasta_ID == hasta_ID) {
       return item;
     }
   }
-  return null;
-} */
+  throw{
+    "Bu ID de hasta bulunmamaktadir"
+  };
+}
 
-hastaAyarGorunumu(int hasta_ID){}
+
+hastaGirisSorgusu(String hasta_MAIL, String hasta_SIFRE)async{
+  // eger hastanin girdigi email ve sifre gecerli ise hasta_ID si dondurulur 
+  // yanlis giris yapildiysa -1 dondurulur
+  List<Hasta> hastaList = await hastaGetRequest();
+  for (var item in hastaList) {
+    if(hasta_MAIL == item.hasta_MAIL && hasta_SIFRE == item.hasta_SIFRE){
+      return item.hasta_ID;
+    }
+  }
+  return -1;
+}
+
+
+
 
 //mesajGonder(String mesaj, int doktor_ID, int hasta_ID, String gonderen){}
-essizMesajListesi(int? doktor_ID, int? hasta_ID, String kimden) async{// buglu
+hastaEkraniDoktor(int hasta_ID) async{// buglu
+  List<Mesaj> mesajListesi = await mesajGetRequest();
+  List<Mesaj> essizMesajListesi = [];
+  List<Doktor> doktorList = await doktorGetRequest();
+  List<Doktor> essizDoktorListesi = [];
   
-  var url = "http://37.75.8.238:3000/api/mesajlar/";
-  final response = await http.get(Uri.parse(url));
-
-  var responseData = json.decode(response.body);
-
-    //Creating a list to store input data;
-  List<Mesaj> mesajlar = [];
+  String kimden = 'hasta';
   
-  if(kimden.toLowerCase() == 'doktor'){
-    
-    for (var singleMesaj in responseData) {
-      Mesaj mesaj = Mesaj(
-          mesaj_ID: singleMesaj['mesaj_ID'],
-          doktor_ID: singleMesaj["doktor_ID"],
-          hasta_ID: singleMesaj['hasta_ID'],
-          mesaj: singleMesaj['mesaj'],
-          eklenti_path: singleMesaj['eklenti_path'],
-          mesaj_tarihi: singleMesaj['mesaj_tarihi'],
-          gonderen: singleMesaj['gonderen']
-          );
-      //Adding user to the list.
-      if(doktor_ID == mesaj.doktor_ID){
-        if (essizmi(mesajlar, mesaj, kimden)) {
-          mesajlar.add(mesaj);
-        }
-      }
-      
+  for (var item in mesajListesi) {
+    if (essizmi(essizMesajListesi,item,'hasta')&& item.hasta_ID ==hasta_ID) {
+      essizMesajListesi.add(item);
     }
-  } else if (kimden.toLowerCase() == 'hasta'){
-    
-    for (var singleMesaj in responseData) {
-      Mesaj mesaj = Mesaj(
-          mesaj_ID: singleMesaj['mesaj_ID'],
-          doktor_ID: singleMesaj["doktor_ID"],
-          hasta_ID: singleMesaj['hasta_ID'],
-          mesaj: singleMesaj['mesaj'],
-          eklenti_path: singleMesaj['eklenti_path'],
-          mesaj_tarihi: singleMesaj['mesaj_tarihi'],
-          gonderen: singleMesaj['gonderen']
-          );
-      //Adding user to the list.
-      if(hasta_ID == mesaj.hasta_ID){
-        if (essizmi(mesajlar, mesaj, kimden)) {
-          mesajlar.add(mesaj);
-        }
+  }
+  for (var item in essizMesajListesi) {
+    for (var item2 in doktorList) {
+      if(item.doktor_ID == item2.doktor_ID){
+        essizDoktorListesi.add(item2);
       }
     }
   }
-  return mesajlar;
+  /* for (var item in essizDoktorListesi) {
+    debugPrint(item.doktor_ID.toString()+" "+item.doktor_ISIM+" "+item.doktor_SOYISIM);
+  } */
+  return essizDoktorListesi;
+}
+doktorEkraniHasta(int doktor_ID) async{
+  List<Mesaj> mesajListesi = await mesajGetRequest();
+  List<Mesaj> essizMesajListesi = [];
+  List<Hasta> hastaList = await hastaGetRequest();
+  List<Hasta> essizHastaListesi = [];
+  String kimden = 'doktor';
+  
+  for (var item in mesajListesi) {
+    if (essizmi(essizMesajListesi, item, 'doktor') && item.doktor_ID ==doktor_ID) {     
+      essizMesajListesi.add(item);
+    }
+  }
+  for (var item in essizMesajListesi) {
+    for (var item2 in hastaList ) {
+      if (item.hasta_ID == item2.hasta_ID) {
+        essizHastaListesi.add(item2);
+      }
+    }
+  }
+  /* for (var item in essizHastaListesi) { // for debug puposes
+    debugPrint(item.hasta_ID.toString()+" "+item.hasta_ISIM+" "+item.hasta_SOYISIM+" "+item.hasta_MAIL);
+  } */
+  return essizHastaListesi;
 }
 
 bool essizmi(List<Mesaj> liste, Mesaj mesaj, String kimden){
   if(kimden.toLowerCase() == 'doktor'){ // doktorun listesinde ayni hastandan varmi diye kontrol edilir
+    
     for (var item in liste) {
       if (mesaj.hasta_ID == item.hasta_ID) {
         return false;
       }
     }
+
     return true;
   }
   else{ // hastanin listesinde ayni doktordan varmi diye kontrol edilir
+
     for (var item in liste) {
       if (mesaj.doktor_ID == item.doktor_ID) {
+
         return false;
       }
     }
+
     return true;
   }
 }
 
-
+Future<http.Response> hastaAyarDegisimi(int hasta_ID, {String? hasta_ISIM = null, String? hasta_SOYISIM, String? hasta_SIFRE, String? hasta_FOTO}) async{
+  // hasta girdilerdeki isim soyisim sifre alanlarini bos biraktiysa bu fonksiyonu cagirirken oraya null yaz
+  Hasta hasta = await hastaAyarGorunumu(hasta_ID);
+  if (hasta_SIFRE == null) {
+    hasta_SIFRE = hasta.hasta_SIFRE;
+  }
+  if (hasta_ISIM == null) {
+    hasta_ISIM = hasta.hasta_ISIM;
+  }
+  if (hasta_SOYISIM == null) {
+    hasta_SOYISIM = hasta.hasta_SOYISIM;
+  }
+  if(hasta_FOTO == null){
+    hasta_FOTO = hasta.hasta_FOTO;
+  }
+  return http.put(
+    Uri.parse("http://37.75.8.238:3000/api/hastalar/$hasta_ID"),
+    headers: <String, String>{'Content-Type':'application/json; charset=UTF-8',
+    }, body: jsonEncode(<String,dynamic>{
+        'hasta_ID': hasta.hasta_ID,
+        'hasta_ISIM': hasta_ISIM,
+        'hasta_SOYISIM': hasta_SOYISIM,
+        'hasta_MAIL': hasta.hasta_MAIL,
+        'hasta_SIFRE': hasta_SIFRE,
+        'hasta_FOTO': hasta_FOTO
+      }
+    )
+  );
+}
+// yapmayi unutma
+Future<http.Response> doktorAyarDegisim(int doktor_ID, {String? doktor_ISIM, String? doktor_SOYISIM, String? doktor_SIFRE, String? doktor_FOTO}) async{
+  Doktor doktor = await doktorAyarGorunumu(doktor_ID);
+  if (doktor_SIFRE == null) {
+    doktor_SIFRE = doktor.doktor_SIFRE;
+  }
+  if (doktor_ISIM == null) {
+    doktor_ISIM = doktor.doktor_ISIM;
+  }
+  if (doktor_SOYISIM == null) {
+    doktor_SOYISIM = doktor.doktor_SOYISIM;
+  }
+  if (doktor_FOTO == null) {
+    doktor_FOTO = doktor.doktor_FOTO;
+  }
+  return http.put(
+    Uri.parse("http://37.75.8.238:3000/api//$doktor_ID"),
+    headers: <String, String>{'Content-Type':'application/json; charset=UTF-8',
+    }, body: jsonEncode(<String,dynamic>{
+        'doktor_ID': doktor.doktor_ID,
+        'doktor_ISIM': doktor_ISIM,
+        'doktor_SOYISIM': doktor_SOYISIM,
+        'doktor_MAIL': doktor.doktor_MAIL,
+        'doktor_SIFRE': doktor_SIFRE,
+        'doktor_FOTO': doktor_FOTO
+      }
+    )
+  );
+}
