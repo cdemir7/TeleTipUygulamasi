@@ -1,5 +1,9 @@
+//fotoğraf hariç
+//bütün işlemler tamam
+
 import 'package:deneme_1/Screens/doktor_profil_ekrani.dart';
 import 'package:deneme_1/server_util/classes.dart';
+import 'package:deneme_1/server_util/processed_requests.dart';
 import 'package:flutter/material.dart';
 
 class DoktorProfilEdit extends StatefulWidget {
@@ -12,14 +16,9 @@ class DoktorProfilEdit extends StatefulWidget {
 }
 
 class _DoktorProfilEditState extends State<DoktorProfilEdit> {
-  String doktorAdi = "AD";
-  String doktorSoyadi = "SOYAD";
   final adController = TextEditingController();
   final soyadController = TextEditingController();
   final sifreController = TextEditingController();
-
-  List<bool> dene = [false, false, false, false, false];
-  bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +47,7 @@ class _DoktorProfilEditState extends State<DoktorProfilEdit> {
                 maxLength: 20,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: doktorAdi,
+                  hintText: "AD",
                 ),
               ),
               TextField(
@@ -57,7 +56,7 @@ class _DoktorProfilEditState extends State<DoktorProfilEdit> {
                 maxLength: 20,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: doktorSoyadi,
+                  hintText: "SOYAD",
                 ),
               ),
               TextField(
@@ -73,11 +72,18 @@ class _DoktorProfilEditState extends State<DoktorProfilEdit> {
                 children: [
                   SizedBox(width: 5),
                   RaisedButton(
-                    onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                DoktorProfilEkrani(widget.doktor))),
+                    onPressed: () {
+                      doktorAyarDegisim(widget.doktor.doktor_ID,
+                          doktor_ISIM: adController.text,
+                          doktor_SOYISIM: soyadController.text,
+                          doktor_SIFRE: sifreController.text);
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DoktorProfilEkrani(widget.doktor)));
+                    },
                     child: Text("KAYDET"),
                   ),
                 ],
