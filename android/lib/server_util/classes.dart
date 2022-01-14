@@ -4,13 +4,15 @@ class Doktor {
   final String doktor_SOYISIM;
   final String doktor_MAIL;
   final String doktor_SIFRE;
+  String doktor_FOTO;
 
   Doktor({
     required this.doktor_ID,
     required this.doktor_ISIM,
     required this.doktor_SOYISIM,
     required this.doktor_MAIL,
-    required this.doktor_SIFRE
+    required this.doktor_SIFRE,
+    this.doktor_FOTO = '0'
   });
 }
 class Abd {
@@ -33,12 +35,14 @@ class Hasta {
   final String hasta_SOYISIM;
   final String hasta_MAIL;
   final String hasta_SIFRE;
+  final String hasta_FOTO;
   Hasta({
     required this.hasta_ID,
     required this.hasta_ISIM,
     required this.hasta_SOYISIM,
     required this.hasta_MAIL,
-    required this.hasta_SIFRE
+    required this.hasta_SIFRE,
+    this.hasta_FOTO = '0'
   });
 }
 class Uzmanlik {
@@ -60,6 +64,7 @@ class Mesaj {// gonderen degeri 0 ise doktor 1 ise hasta
   final int doktor_ID;
   final int hasta_ID;
   final String mesaj;
+  final String? eklenti_path;
   final String? mesaj_tarihi;
   final String gonderen;
 
@@ -69,6 +74,7 @@ class Mesaj {// gonderen degeri 0 ise doktor 1 ise hasta
     required this.doktor_ID,
     required this.hasta_ID,
     required this.mesaj,
+    this.eklenti_path,
     this.mesaj_tarihi,
     required this.gonderen, 
   });
