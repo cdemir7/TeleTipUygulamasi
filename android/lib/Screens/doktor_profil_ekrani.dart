@@ -1,26 +1,25 @@
 import 'package:deneme_1/server_util/classes.dart';
+import 'package:deneme_1/server_util/processed_requests.dart';
 import 'package:flutter/material.dart';
 import 'package:deneme_1/Screens/doktor_profil_edit.dart';
+import 'package:deneme_1/server_util/requests.dart';
 
 class DoktorProfilEkrani extends StatefulWidget {
   Doktor doktor;
-  DoktorProfilEkrani(this.doktor);
+  Abd abd;
+  DoktorProfilEkrani(this.doktor, this.abd);
 
   @override
   _DoktorProfilEkraniState createState() => _DoktorProfilEkraniState();
 }
 
 class _DoktorProfilEkraniState extends State<DoktorProfilEkrani> {
-  String doktorAdi = "DOKTOR ADI";
-  String doktorSoyadi = "DOKTOR SOYADI";
-  String doktorEpostasi = "DOKTOR E-POSTA'SI";
-  String doktorAnabilimDali = "DOKTOR ANABİLİM DALI";
   List<String> uzmanlikAlanlari = [
-    "ALAN 1",
+    /*    "ALAN 1",
     "ALAN 2",
     "ALAN 3",
     "ALAN 4",
-    "ALAN 5"
+    "ALAN 5" */
   ];
 
   @override
@@ -96,7 +95,7 @@ class _DoktorProfilEkraniState extends State<DoktorProfilEkrani> {
               children: [
                 SizedBox(width: 5),
                 Text(
-                  "doktorun abdleri çekilmemiş",
+                  widget.abd.abd_ISIM,
                   style: TextStyle(fontSize: 20),
                 ),
               ],

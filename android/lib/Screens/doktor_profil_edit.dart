@@ -78,11 +78,11 @@ class _DoktorProfilEditState extends State<DoktorProfilEdit> {
                           doktor_SOYISIM: soyadController.text,
                           doktor_SIFRE: sifreController.text);
 
-                      Navigator.push(
+                      /* Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  DoktorProfilEkrani(widget.doktor)));
+                                  DoktorProfilEkrani(widget.doktor))); */
                     },
                     child: Text("KAYDET"),
                   ),
