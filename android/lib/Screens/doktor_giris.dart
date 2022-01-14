@@ -2,28 +2,47 @@ import 'package:deneme_1/server_util/processed_requests.dart';
 import 'package:flutter/material.dart';
 import './doktor_ana_ekrani.dart';
 import 'package:deneme_1/server_util/classes.dart';
+import 'package:deneme_1/server_util/requests.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class Doktor_Giris extends StatelessWidget {
   //Doktor_Giris({Key? key}) : super(key: key);
   final epostaController = TextEditingController();
   final sifreController = TextEditingController();
-
-  @override
-  static int id = 123;
-  static String ad = "Kanber";
-  static String soyad = "Kanberoğlu";
-  static String eposta = "kanber@gmail.com";
-  static String sifre = "12341234";
-
-  //Doktor doktor2 = doktorGirisSorgusu(eposta, sifre);
+  static int id = 0;
+  static String ad = "";
+  static String soyad = "";
+  static String eposta = "";
+  static String sifre = "";
 
   Doktor doktor = Doktor(
-      doktor_ID: id,
-      doktor_ISIM: ad,
-      doktor_SOYISIM: soyad,
-      doktor_MAIL: eposta,
-      doktor_SIFRE: sifre);
+    doktor_ID: id,
+    doktor_ISIM: ad,
+    doktor_SOYISIM: soyad,
+    doktor_MAIL: eposta,
+    doktor_SIFRE: sifre,
+  );
+  static bool kontrol = false;
+  Future doktorGirisSorgusu(String doktor_MAIL, String doktor_SIFRE) async {
+    List<Doktor> doktorList = await doktorGetRequest();
 
+    for (var item in doktorList) {
+      if (item.doktor_MAIL == doktor_MAIL &&
+          item.doktor_SIFRE == doktor_SIFRE) {
+        id = item.doktor_ID;
+        ad = item.doktor_ISIM;
+        soyad = item.doktor_SOYISIM;
+        eposta = item.doktor_MAIL;
+        sifre = item.doktor_SIFRE;
+        kontrol = true;
+      } else {
+        kontrol = false;
+      }
+    }
+  }
+
+  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,16 +88,16 @@ class Doktor_Giris extends StatelessWidget {
                     textColor: Colors.white,
                     color: Colors.lightBlueAccent,
                     onPressed: () {
-                      /*    var nesne = doktorGirisSorgusu(
-                          epostaController.text, sifreController.text); */
+                      doktorGirisSorgusu(
+                          epostaController.text, sifreController.text);
 
-                      print(epostaController.text);
-                      print(sifreController.text);
-
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Doktor_Ana_Ekrani(doktor)));
+                      if (kontrol) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    Doktor_Ana_Ekrani(doktor)));
+                      }
                     }),
               ],
             ),
