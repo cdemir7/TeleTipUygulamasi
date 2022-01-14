@@ -66,7 +66,6 @@ class Doktor_Giris extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             child: Material(
               child: TextFormField(
-                obscureText: true,
                 controller: sifreController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
