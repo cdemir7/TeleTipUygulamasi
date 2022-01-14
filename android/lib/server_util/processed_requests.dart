@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 
-Future doktorGirisSorgusu(String doktor_MAIL, String doktor_SIFRE) async {
+doktorGirisSorgusu(String doktor_MAIL, String doktor_SIFRE) async {
   // Doktor giris ekraninda girilen mail ve sifreyi kontrol eder
   // doktorun varolmasi durumunda cagirildigi yere 0 ve doktorun bilgilarini dondurur
   // var olmamasi duruminda cagirildigi yere 1 ve null dondurur
@@ -19,7 +19,7 @@ Future doktorGirisSorgusu(String doktor_MAIL, String doktor_SIFRE) async {
   }
   return {'durum': 1, 'doktor': null};
 }
-Future hastaGirisSorgusu(String hasta_MAIL, String hasta_SIFRE)async{
+hastaGirisSorgusu(String hasta_MAIL, String hasta_SIFRE)async{
   // Hasta giriş ekranında girilen mail ve şifreyi kontrol eder
   // Hastanın varolması durumunda çağırıldığı yere 0 ve hastanın bilgilerini dödürür
   // Hastanın varolmaması ya da hatalı giriş durumunda 1 ve null dödürür
@@ -251,7 +251,7 @@ bool essizmi(List<Mesaj> liste, Mesaj mesaj, String kimden){
   }
 }
 
-Future<http.Response> hastaAyarDegisimi(int hasta_ID, {String? hasta_ISIM = null, String? hasta_SOYISIM, String? hasta_SIFRE, String? hasta_FOTO}) async{
+Future<http.Response> hastaAyarDegisimi(int hasta_ID, {String? hasta_ISIM , String? hasta_SOYISIM, String? hasta_SIFRE, String? hasta_FOTO}) async{
   // hasta girdilerdeki isim soyisim sifre alanlarini bos biraktiysa bu fonksiyonu cagirirken oraya null yaz
   Hasta hasta = await hastaAyarGorunumu(hasta_ID);
   if (hasta_SIFRE == null) {
