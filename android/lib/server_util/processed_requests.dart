@@ -49,6 +49,7 @@ Future<List<Mesaj>> mesajEkraniSorgusu(int doktor_ID, int hasta_ID) async {
           doktor_ID: singleMesaj["doktor_ID"],
           hasta_ID: singleMesaj['hasta_ID'],
           mesaj: singleMesaj['mesaj'],
+          eklenti_path: singleMesaj['eklenti_path'],
           mesaj_tarihi: singleMesaj['mesaj_tarihi'],
           gonderen: singleMesaj['gonderen']
           );
@@ -62,11 +63,13 @@ Future<List<Mesaj>> mesajEkraniSorgusu(int doktor_ID, int hasta_ID) async {
     return mesajlar;
 }
 Future<List<Abd>> abdDoktor(String abd_START) async {
+    //replace your restFull API here.
     var url = "http://37.75.8.238:3000/api/doktorlar/anabilimdali";
     final response = await http.get(Uri.parse(url));
 
     var responseData = json.decode(response.body);
 
+    //Creating a list to store input data;
     List<Abd> abdler = [];
     for (var singleAbd in responseData) {
       Abd abd = Abd(
@@ -75,6 +78,7 @@ Future<List<Abd>> abdDoktor(String abd_START) async {
         doktor_ISIM: singleAbd['doktor_ISIM'],
         doktor_SOYISIM: singleAbd['doktor_SOYISIM']);
 
+      //Adding user to the list.
       if(abd.abd_ISIM.startsWith(abd_START)){
         abdler.add(abd);
       }
@@ -247,7 +251,7 @@ bool essizmi(List<Mesaj> liste, Mesaj mesaj, String kimden){
   }
 }
 
-Future<http.Response> hastaAyarDegisimi(int hasta_ID, {String? hasta_ISIM , String? hasta_SOYISIM, String? hasta_SIFRE}) async{
+Future<http.Response> hastaAyarDegisimi(int hasta_ID, {String? hasta_ISIM , String? hasta_SOYISIM, String? hasta_SIFRE, String? hasta_FOTO}) async{
   // hasta girdilerdeki isim soyisim sifre alanlarini bos biraktiysa bu fonksiyonu cagirirken oraya null yaz
   Hasta hasta = await hastaAyarGorunumu(hasta_ID);
   if (hasta_SIFRE == null) {
@@ -259,6 +263,9 @@ Future<http.Response> hastaAyarDegisimi(int hasta_ID, {String? hasta_ISIM , Stri
   if (hasta_SOYISIM == null) {
     hasta_SOYISIM = hasta.hasta_SOYISIM;
   }
+  if(hasta_FOTO == null){
+    hasta_FOTO = hasta.hasta_FOTO;
+  }
   return http.put(
     Uri.parse("http://37.75.8.238:3000/api/hastalar/$hasta_ID"),
     headers: <String, String>{'Content-Type':'application/json; charset=UTF-8',
@@ -267,12 +274,14 @@ Future<http.Response> hastaAyarDegisimi(int hasta_ID, {String? hasta_ISIM , Stri
         'hasta_ISIM': hasta_ISIM,
         'hasta_SOYISIM': hasta_SOYISIM,
         'hasta_MAIL': hasta.hasta_MAIL,
-        'hasta_SIFRE': hasta_SIFRE
+        'hasta_SIFRE': hasta_SIFRE,
+        'hasta_FOTO': hasta_FOTO
       }
     )
   );
 }
-Future<http.Response> doktorAyarDegisim(int doktor_ID, {String? doktor_ISIM, String? doktor_SOYISIM, String? doktor_SIFRE}) async{
+// yapmayi unutma
+Future<http.Response> doktorAyarDegisim(int doktor_ID, {String? doktor_ISIM, String? doktor_SOYISIM, String? doktor_SIFRE, String? doktor_FOTO}) async{
   Doktor doktor = await doktorAyarGorunumu(doktor_ID);
   if (doktor_SIFRE == null) {
     doktor_SIFRE = doktor.doktor_SIFRE;
@@ -283,6 +292,9 @@ Future<http.Response> doktorAyarDegisim(int doktor_ID, {String? doktor_ISIM, Str
   if (doktor_SOYISIM == null) {
     doktor_SOYISIM = doktor.doktor_SOYISIM;
   }
+  if (doktor_FOTO == null) {
+    doktor_FOTO = doktor.doktor_FOTO;
+  }
   return http.put(
     Uri.parse("http://37.75.8.238:3000/api//$doktor_ID"),
     headers: <String, String>{'Content-Type':'application/json; charset=UTF-8',
@@ -292,6 +304,7 @@ Future<http.Response> doktorAyarDegisim(int doktor_ID, {String? doktor_ISIM, Str
         'doktor_SOYISIM': doktor_SOYISIM,
         'doktor_MAIL': doktor.doktor_MAIL,
         'doktor_SIFRE': doktor_SIFRE,
+        'doktor_FOTO': doktor_FOTO
       }
     )
   );
