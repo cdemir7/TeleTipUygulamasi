@@ -1,7 +1,10 @@
+import 'package:deneme_1/server_util/classes.dart';
+import 'package:deneme_1/server_util/processed_requests.dart';
 import 'package:flutter/material.dart';
 
 class Hasta_Mesaj_Ekrani extends StatefulWidget {
-  const Hasta_Mesaj_Ekrani({Key? key}) : super(key: key);
+  Hasta hasta;
+  Hasta_Mesaj_Ekrani(this.hasta);
 
   @override
   _Hasta_Mesaj_EkraniState createState() => _Hasta_Mesaj_EkraniState();

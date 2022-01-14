@@ -1,3 +1,4 @@
+//bütün işlemler tamam
 //kayıt işlemi buton içinde yorum satırında
 
 import 'package:deneme_1/server_util/classes.dart';
@@ -62,8 +63,8 @@ class _HastaKayitEkraniState extends State<HastaKayitEkrani> {
             ),
             RaisedButton(
               onPressed: () {
-                /* hastaKayit(adController.text, soyadController.text,
-                    ePostaController.text, sifreController.text); */
+                hastaKayit(adController.text, soyadController.text,
+                    ePostaController.text, sifreController.text);
 
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => Hasta_Giris()));

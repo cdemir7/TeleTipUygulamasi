@@ -66,7 +66,7 @@ class _Hasta_Ana_EkraniState extends State<Hasta_Ana_Ekrani> {
                                   HastaProfilEkrani(widget.hasta))),
                     ),
                     SizedBox(
-                      width: 60,
+                      width: 20,
                     ),
                     Text(widget.hasta.hasta_ISIM),
                     SizedBox(
@@ -83,7 +83,8 @@ class _Hasta_Ana_EkraniState extends State<Hasta_Ana_Ekrani> {
                       onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Hasta_Mesaj_Ekrani())),
+                              builder: (context) =>
+                                  Hasta_Mesaj_Ekrani(widget.hasta))),
                     ),
                   ],
                 ),
@@ -95,6 +96,7 @@ class _Hasta_Ana_EkraniState extends State<Hasta_Ana_Ekrani> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                 child: TextField(
+                  //inputFormatters: [],
                   controller: controller,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
@@ -115,6 +117,7 @@ class _Hasta_Ana_EkraniState extends State<Hasta_Ana_Ekrani> {
                         ),
                         onPressed: () {
                           idegistir(1);
+                          controller.clear();
                         }),
                     SizedBox(width: 20),
                     RaisedButton(
@@ -127,6 +130,7 @@ class _Hasta_Ana_EkraniState extends State<Hasta_Ana_Ekrani> {
                       ),
                       onPressed: () {
                         idegistir(2);
+                        controller.clear();
                       },
                     ),
                     SizedBox(
@@ -144,6 +148,7 @@ class _Hasta_Ana_EkraniState extends State<Hasta_Ana_Ekrani> {
                       ),
                       onPressed: () {
                         idegistir(3);
+                        controller.clear();
                       },
                     ),
                   ],

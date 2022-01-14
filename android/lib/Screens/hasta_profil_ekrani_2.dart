@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HastaProfilEkrani extends StatefulWidget {
-  const HastaProfilEkrani({Key? key}) : super(key: key);
+class HastaProfilEkrani2 extends StatefulWidget {
+  const HastaProfilEkrani2({Key? key}) : super(key: key);
 
   @override
   _HastaProfilEkraniState createState() => _HastaProfilEkraniState();
 }
 
-class _HastaProfilEkraniState extends State<HastaProfilEkrani> {
+class _HastaProfilEkraniState extends State<HastaProfilEkrani2> {
   String hastaAdi = "HASTA ADI";
   String hastaSoyadi = "HASTA SOYADI";
   String hastaEpostasi = "HASTA E-POSTA'SI";
