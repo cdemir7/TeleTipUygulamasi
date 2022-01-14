@@ -23,7 +23,7 @@ class Doktor_Giris extends StatelessWidget {
     doktor_MAIL: eposta,
     doktor_SIFRE: sifre,
   );
-  static bool kontrol = false;
+  static bool kontrol1 = false;
   Future doktorGirisSorgusu(String doktor_MAIL, String doktor_SIFRE) async {
     List<Doktor> doktorList = await doktorGetRequest();
 
@@ -35,9 +35,9 @@ class Doktor_Giris extends StatelessWidget {
         soyad = item.doktor_SOYISIM;
         eposta = item.doktor_MAIL;
         sifre = item.doktor_SIFRE;
-        kontrol = true;
+        kontrol1 = true;
       } else {
-        kontrol = false;
+        kontrol1 = false;
       }
     }
   }
@@ -90,14 +90,17 @@ class Doktor_Giris extends StatelessWidget {
                     onPressed: () {
                       doktorGirisSorgusu(
                           epostaController.text, sifreController.text);
+                      print(doktor.doktor_ISIM);
+                      print(doktor.doktor_SOYISIM);
+                      epostaController.clear();
+                      sifreController.clear();
 
-                      if (kontrol) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    Doktor_Ana_Ekrani(doktor)));
-                      }
+                      //    if (kontrol1 == true) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Doktor_Ana_Ekrani(doktor)));
+                      //    }
                     }),
               ],
             ),

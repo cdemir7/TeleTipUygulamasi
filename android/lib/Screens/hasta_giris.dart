@@ -89,6 +89,10 @@ class Hasta_Giris extends StatelessWidget {
                     onPressed: () {
                       hastaGirisSorgusu(
                           mailController.text, sifreController.text);
+
+                      print(hasta.hasta_ISIM);
+                      mailController.clear();
+                      sifreController.clear();
                       if (kontrol) {
                         Navigator.push(
                             context,
