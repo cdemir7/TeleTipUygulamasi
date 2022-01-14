@@ -66,6 +66,7 @@ class Hasta_Giris extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
             child: TextFormField(
+              obscureText: true,
               controller: sifreController,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
